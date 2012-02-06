@@ -9,3 +9,6 @@ cp -r _site/* _deploy
 touch _deploy/.nojekyll
 
 (cd _deploy && git add --all && git commit -am "deploy" && git push origin master)
+
+# git remote rm origin
+# git remote add origin git@github.com:stratuseditor/stratuseditor.github.com.git
