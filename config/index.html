@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Config | Stratus</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/fractus.css"/>
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28540494-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><a href="/">Stratus</a></h1>
+        <nav>
+          <ul>
+            <li><a href="/manual">Manual</a></li>
+            <li><a href="/bundles">Bundles</a></li>
+            <li><a href="/config">Config</a></li>
+            <li><a href="/plugins">Plugin API</a></li>
+            <li><a href="http://sentientwaffle.github.com/">Blog</a></li>
+            <li id="soon">Coming Soon</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <!--
+    <a href="http://github.com/stratuseditor/stratus"><img draggable="false" style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
+    -->
+    
+    <div class="container">
+      <h1 id="Overview">Overview</h1>
+
+<p>Your configuration options are determined by the following
+(every item in this list overrides options set below it):</p>
+
+<ul>
+<li><code>current-project/.stratus.json</code> - Project-specific config.</li>
+<li><code>.stratus/config.json</code> - User-specific config (<code>.stratus</code>
+is the special project name).</li>
+<li>And finally, the default config file that comes with Stratus.</li>
+</ul>
+
+
+<p>When the specified data type is <code>Key</code>, it means a key <code>String</code>, such as:</p>
+
+<ul>
+<li><code>Shift-\n</code>             - Shift+enter</li>
+<li><code>Alt-Control-Shift-\n</code> - Alt+control+shift+enter</li>
+<li><code>Alt-w</code>                - Alt+w</li>
+<li><code>Alt-\t</code>               - Alt+Tab</li>
+<li><code>Q</code>                    - Shift+q</li>
+</ul>
+
+
+<p><strong>Important</strong>: modifiers are alphabetical -- <code>Alt</code>, <code>Control</code>, <code>Shift</code>.</p>
+
+<p>If the <code>Key</code> is <code>false</code>, that event is not bound.</p>
+
+<h1 id="file">file</h1>
+
+<h2 id="file.recent.limit">file.recent.limit</h2>
+
+<p><code>Integer</code> -
+The number of files to display in the <em>Open Recent</em> menu. If <code>0</code>, display all.</p>
+
+<h1 id="fractus">fractus</h1>
+
+<h2 id="fractus.autocomplete">fractus.autocomplete</h2>
+
+<p><code>Key</code> -
+The key to trigger the autocompletion.</p>
+
+<h2 id="fractus.autoindent">fractus.autoindent</h2>
+
+<p><code>Boolean</code> -
+Whether or not the current line's indentation should be applied to
+lines created by pressing <em>enter</em>.</p>
+
+<h2 id="fractus.font">fractus.font</h2>
+
+<h3 id="fractus.font.monospace.family">fractus.font.monospace.family</h3>
+
+<p><code>String</code> -
+A monospace font family, such as <code>Inconsolata</code>.</p>
+
+<h3 id="fractus.font.monospace.size">fractus.font.monospace.size</h3>
+
+<p><code>Integer</code> -
+The default size for monospace fonts.</p>
+
+<h2 id="fractus.line-numbers">fractus.line-numbers</h2>
+
+<p><code>Boolean</code> -
+Whether or not to show line numbers.</p>
+
+<h2 id="fractus.pairs">fractus.pairs</h2>
+
+<p><code>Object</code> -
+Automatically pair characters.
+For example:</p>
+
+<pre><code>{ ...
+"fractus.pairs": {"&lt;": "&gt;"}
+... }
+</code></pre>
+
+<p>would insert <em>&lt;></em> whenever <em>&lt;</em> is pressed. If text is selected, it will
+be surrounded by the characters.</p>
+
+<p>The following prevents the single quote (which, by default, pairs),
+from pairing:</p>
+
+<pre><code>{ ...
+"fractus.pairs": {"'": false}
+... }
+</code></pre>
+
+<h2 id="fractus.pairs.match">fractus.pairs.match</h2>
+
+<p><code>Boolean</code> -
+Whether or not to highlight the matching pair character.</p>
+
+<p><img src="/images/manual/pair-match.jpg" alt="Pair matching" />
+<img src="/images/manual/pair-match2.jpg" alt="Pair matching" /></p>
+
+<p><strong>Note</strong>: Regardless of <a href="#fractus.pairs"><code>fractus.pairs</code></a>, the pairs that will be matched
+are <code>()</code>, <code>[]</code>, and <code>{}</code>.</p>
+
+<h2 id="fractus.save">fractus.save</h2>
+
+<p><code>Key</code> -
+When pressed, save the current file.</p>
+
+<h2 id="fractus.scrollwheel">fractus.scrollwheel</h2>
+
+<p><code>Integer</code> -
+The number of lines to scroll by.</p>
+
+<h2 id="fractus.tab@Lang">fractus.tab@Lang</h2>
+
+<p><code>String</code> -
+Override the default tab width as defined by the current bundle.</p>
+
+<h3 id="Examples">Examples</h3>
+
+<p>4 space indent for <code>Go</code></p>
+
+<pre><code>"fractus.tab@Go": "    "
+</code></pre>
+
+<p>or hard tabs</p>
+
+<pre><code>"fractus.tab@Go": "\t"
+</code></pre>
+
+<h2 id="fractus.theme">fractus.theme</h2>
+
+<p><code>String</code> -
+The name of the theme to use.</p>
+
+<p>See <a href="/manual#Themes">themes</a> for a list of the themes that are included
+by default.</p>
+
+<h1 id="redirect">redirect</h1>
+
+<p><code>Boolean</code> -
+If set the <code>false</code>, refreshing or otherwise redirecting away from Stratus
+will pop up an "Are you sure?" message.</p>
+
+<h1 id="search">search</h1>
+
+<p><code>Key</code> -
+The key to trigger the search/replace dialog.</p>
+
+<h2 id="search.ignorecase">search.ignorecase</h2>
+
+<p><code>Boolean</code> -
+Whether or not searches should ignore case by default.</p>
+
+<h2 id="search.regexp">search.regexp</h2>
+
+<p><code>Boolean</code> -
+Whether or not searches should search by regular expressions by default.</p>
+
+<h1 id="snapopen">snapopen</h1>
+
+<p><code>Key</code> -
+The key to open the <em>Snap Open</em> dialog.</p>
+
+<h2 id="snapopen.ignorecase">snapopen.ignorecase</h2>
+
+<p><code>Boolean</code> -
+Whether or not to ignore case when filtering files.</p>
+
+<h2 id="snapopen.limit">snapopen.limit</h2>
+
+<p><code>Integer</code> -
+The maximum number of matches by the SnapOpen file opener. The lower this
+number is, the faster snapopen will perform.</p>
+
+<h1 id="ui">ui</h1>
+
+<h2 id="ui.filetree.side">ui.filetree.side</h2>
+
+<p><code>"left" | "right"</code> -
+Which side of the left/right split to put the file tree on.</p>
+
+<h2 id="ui.filetree.width">ui.filetree.width</h2>
+
+<p><code>Integer</code> -
+The width of the file tree (pixels). 250ish is reasonable.</p>
+<nav class="table-of-contents">
+          
+ <ul>
+ <li><a href="#Overview">Overview</a> </li>
+ <li><a href="#file">file</a>
+  <ul>
+  <li><a href="#file.recent.limit">file.recent.limit</a>  </li>
+ </ul>
+ <li><a href="#fractus">fractus</a>
+  <ul>
+  <li><a href="#fractus.autocomplete">fractus.autocomplete</a>  </li>
+  <li><a href="#fractus.autoindent">fractus.autoindent</a>  </li>
+  <li><a href="#fractus.font">fractus.font</a>
+   <ul>
+   <li><a href="#fractus.font.monospace.family">fractus.font.monospace.family</a>   </li>
+   <li><a href="#fractus.font.monospace.size">fractus.font.monospace.size</a>   </li>
+  </ul>
+  <li><a href="#fractus.line-numbers">fractus.line-numbers</a>  </li>
+  <li><a href="#fractus.pairs">fractus.pairs</a>  </li>
+  <li><a href="#fractus.pairs.match">fractus.pairs.match</a>  </li>
+  <li><a href="#fractus.save">fractus.save</a>  </li>
+  <li><a href="#fractus.scrollwheel">fractus.scrollwheel</a>  </li>
+  <li><a href="#fractus.tab@Lang">fractus.tab@Lang</a>
+   <ul>
+   <li><a href="#Examples">Examples</a>   </li>
+  </ul>
+  <li><a href="#fractus.theme">fractus.theme</a>  </li>
+ </ul>
+ <li><a href="#redirect">redirect</a> </li>
+ <li><a href="#search">search</a>
+  <ul>
+  <li><a href="#search.ignorecase">search.ignorecase</a>  </li>
+  <li><a href="#search.regexp">search.regexp</a>  </li>
+ </ul>
+ <li><a href="#snapopen">snapopen</a>
+  <ul>
+  <li><a href="#snapopen.ignorecase">snapopen.ignorecase</a>  </li>
+  <li><a href="#snapopen.limit">snapopen.limit</a>  </li>
+ </ul>
+ <li><a href="#ui">ui</a>
+  <ul>
+  <li><a href="#ui.filetree.side">ui.filetree.side</a>  </li>
+  <li><a href="#ui.filetree.width">ui.filetree.width</a>  </li>
+  </ul>
+ </li>
+ </ul>
+
+
+        </nav>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <hr/>
+        &copy; 2012
+        <a href="https://github.com/sentientwaffle">DJG</a>.
+        All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

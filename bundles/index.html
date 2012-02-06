@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bundles | Stratus</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/fractus.css"/>
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28540494-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><a href="/">Stratus</a></h1>
+        <nav>
+          <ul>
+            <li><a href="/manual">Manual</a></li>
+            <li><a href="/bundles">Bundles</a></li>
+            <li><a href="/config">Config</a></li>
+            <li><a href="/plugins">Plugin API</a></li>
+            <li><a href="http://sentientwaffle.github.com/">Blog</a></li>
+            <li id="soon">Coming Soon</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <!--
+    <a href="http://github.com/stratuseditor/stratus"><img draggable="false" style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
+    -->
+    
+    <div class="container">
+      <h1 id="Existing+bundles">Existing bundles</h1>
+
+<ul>
+<li><a href="https://github.com/stratuseditor/Bash.sebundle">Bash</a></li>
+<li><a href="https://github.com/stratuseditor/C.sebundle">C</a></li>
+<li><a href="https://github.com/stratuseditor/C.PlusPlus.sebundle">C.PlusPlus</a></li>
+<li><a href="https://github.com/stratuseditor/CSS.sebundle">CSS</a></li>
+<li><a href="https://github.com/stratuseditor/CoffeeScript.sebundle">CoffeeScript</a></li>
+<li><a href="https://github.com/stratuseditor/Gherkin.sebundle">Gherkin</a></li>
+<li><a href="https://github.com/stratuseditor/Go.sebundle">Go</a></li>
+<li><a href="https://github.com/stratuseditor/HTML.sebundle">HTML</a></li>
+<li><a href="https://github.com/stratuseditor/HTML.ERB.sebundle">HTML.ERB</a></li>
+<li><a href="https://github.com/stratuseditor/Haml.sebundle">Haml</a></li>
+<li><a href="https://github.com/stratuseditor/Haskell.sebundle">Haskell</a></li>
+<li><a href="https://github.com/stratuseditor/JSON.sebundle">JSON</a></li>
+<li><a href="https://github.com/stratuseditor/Jade.sebundle">Jade</a></li>
+<li><a href="https://github.com/stratuseditor/Java.sebundle">Java</a></li>
+<li><a href="https://github.com/stratuseditor/JavaScript.sebundle">JavaScript</a></li>
+<li><a href="https://github.com/stratuseditor/Markdown.sebundle">Markdown</a></li>
+<li><a href="https://github.com/stratuseditor/Python.sebundle">Python</a></li>
+<li><a href="https://github.com/stratuseditor/Racket.sebundle">Racket</a></li>
+<li><a href="https://github.com/stratuseditor/Ruby.sebundle">Ruby</a></li>
+<li><a href="https://github.com/stratuseditor/Ruby.RSpec.sebundle">Ruby.RSpec</a></li>
+<li><a href="https://github.com/stratuseditor/Ruby.Rails.sebundle">Ruby.Rails</a></li>
+<li><a href="https://github.com/stratuseditor/Ruby.Rails.Controller.sebundle">Ruby.Rails.Controller</a></li>
+<li><a href="https://github.com/stratuseditor/Ruby.Rails.Model.sebundle">Ruby.Rails.Model</a></li>
+<li><a href="https://github.com/stratuseditor/Ruby.Rails.View.sebundle">Ruby.Rails.View</a></li>
+<li><a href="https://github.com/stratuseditor/Sass.sebundle">Sass</a></li>
+<li><a href="https://github.com/stratuseditor/Stylus.sebundle">Stylus</a></li>
+<li><a href="https://github.com/stratuseditor/Text.sebundle">Text</a></li>
+<li><a href="https://github.com/stratuseditor/XML.sebundle">XML</a></li>
+<li><a href="https://github.com/stratuseditor/YAML.sebundle">YAML</a></li>
+</ul>
+
+
+<h1 id="Installation">Installation</h1>
+
+<pre><code>$ npm install stratus-bundle -g
+$ stratus-bundle setup
+</code></pre>
+
+<h1 id="CLI">CLI</h1>
+
+<h2 id="List+installed+bundles">List installed bundles</h2>
+
+<pre><code>$ stratus-bundle list
+Installed bundles:
+...
+  * Python (0.0.1)
+  * Ruby (0.0.1)
+  * Ruby.Rails (0.0.1)
+...
+</code></pre>
+
+<h2 id="Install+a+bundle">Install a bundle</h2>
+
+<pre><code>$ stratus-bundle install Ruby
+Bundle 'Ruby' installed.
+</code></pre>
+
+<h3 id="..+or+from+a+URL">.. or from a URL</h3>
+
+<pre><code>$ stratus-bundle install git://github.com/stratuseditor/JSON.sebundle.git
+Bundle 'JSON' installed.
+</code></pre>
+
+<h2 id="Uninstall+a+bundle">Uninstall a bundle</h2>
+
+<pre><code>$ stratus-bundle uninstall Ruby
+Bundle 'Ruby' uninstalled.
+</code></pre>
+
+<h2 id="Print+bundle+info">Print bundle info</h2>
+
+<pre><code>$ stratus-bundle show Ruby
+
+  Ruby@0.0.1
+
+  * author - sentientwaffle
+  * path   - /path/to/Ruby
+  * url    - https://github.com/stratuseditor/Ruby.sebundle.git
+</code></pre>
+
+<h2 id="Validate+a+bundle">Validate a bundle</h2>
+
+<p>Check whether or not the bundle is valid. (This checks for some
+common errors, such as missing required files or fields).</p>
+
+<pre><code>$ stratus-bundle test Ruby
+
+  + Ruby
+</code></pre>
+
+<h1 id="Writing+bundles">Writing bundles</h1>
+
+<h2 id="Naming+your+bundle">Naming your bundle</h2>
+
+<p>The name of the bundle describes the language it highlights. Bundles can
+extend other bundles.</p>
+
+<p>If the bundle is being put on GitHub, use a <code>.sebundle</code> extention in the
+project name to make it easily searchable.</p>
+
+<h3 id="Examples">Examples</h3>
+
+<ul>
+<li><code>Ruby</code>                  - A basic bundle.</li>
+<li><code>Ruby.Rails</code>            - This bundle inherits from <code>Ruby</code>.</li>
+<li><code>Ruby.Rails.Controller</code> - This bundle inherits from <code>Ruby.Rails</code>, ect.</li>
+</ul>
+
+
+<h2 id="File+structure">File structure</h2>
+
+<p>The directory containing the bundle should have the same name as the bundle's
+language.</p>
+
+<pre><code>BundleName/
+    syntax.json     - Syntax highlighting (required).
+    icon.png        - A 16x16 pixel icon (required).
+    completions.txt - A newline-delimited list of words that should autocomplete (optional).
+</code></pre>
+
+<h2 id="syntax.json">syntax.json</h2>
+
+<p><strong>Required</strong></p>
+
+<p>Keys:</p>
+
+<ul>
+<li><code>name</code> - The language name.</li>
+<li><code>url</code> - The bundle repo.</li>
+<li><code>author</code> - Your name.</li>
+<li><code>version</code> - Semvar style (just like in a package.json).</li>
+<li><code>require</code> - An array of other languages that are dependencies.</li>
+<li><p><code>fileTypes</code> - An array of strings (which converted to RegExps).
+The RegExps are then matched against the end of file paths
+to determine whether or not the bundle should be applied.</p>
+
+<pre><code>{ ...
+, "fileTypes":
+  [ "\\.rb"
+  , "\\.ru"
+  , "Gemfile"
+  , "Rakefile"
+  , "Capfile"
+  , "\\.gemspec"
+  , "\\.rake"
+  ]
+... }
+</code></pre></li>
+<li><p><code>firstLine</code> - If this pattern matches the first line of the file, the
+bundle is applied. This is useful for matching shebangs.</p>
+
+<p>This will apply the Ruby syntax to any files with a Ruby shebang,
+if the file cannot be identified by it's path.</p>
+
+<pre><code>{ ...
+, "firstLine": "^#!/.*\\bruby\\b"
+... }
+</code></pre></li>
+<li><p><code>preferences</code> - An object with some extra configurations (all optional).</p>
+
+<pre><code>...
+, "preferences":
+  { "tab": "  "
+  , "indent":
+    [ "^\\s*(?:module|class|def|for|until|if|else|elsif|unless|while|begin|case)\\b"
+    , "\\b(?:do)\\b"
+    ]
+  , "outdent":
+    [ "\\s(?:end|else|elsif|ensure)"
+    ]
+  , "pairs": {"`": "`"}
+  }
+...
+</code></pre>
+
+<ul>
+<li><code>tab</code> - The default tab string.</li>
+<li><code>indent</code> - A list of patterns. When you hit <code>Enter</code> on a line
+that matches one, the following line is indented an extra level.</li>
+<li><code>outdent</code> - When the line matches one of the patterns, it is outdented.</li>
+<li><p><code>pairs</code> - Extra characters to pair. By default these are:</p>
+
+<pre><code>{"(": ")", "{": "}", "[": "]", "\"": "\"", "'": "'"}
+</code></pre></li>
+</ul>
+</li>
+<li><p><code>syntax</code> - Syntax highlighting rules.
+<code>$</code> is the initial state.</p>
+
+<p>The easiest way to create a grammar is to find a similar language
+<a href="https://github.com/stratuseditor">here</a> and modify it, or you
+can see a list of the rule types <a href="#Highlighting+Rules">here</a>.</p></li>
+</ul>
+
+
+<h2 id="icon.png">icon.png</h2>
+
+<p><strong>Required</strong></p>
+
+<p>A 16x16 png that should represent the file type i.e. a logo.</p>
+
+<h2 id="completions.txt">completions.txt</h2>
+
+<p><strong>Optional</strong></p>
+
+<p>A newline-delimited list of words to autocomplete.</p>
+
+<h1 id="Highlighting+Rules">Highlighting Rules</h1>
+
+<p><strong>Note</strong>: you cannot use the <code>^</code> character to match the beginning of a line --
+doing so will produce unexpected results. Instead, you can assume that there
+is a newline (<code>\n</code>) character at the beginning and end of every line.</p>
+
+<p>Also, these regular expressions cannot match multiple lines; use <code>begin</code>/<code>end</code>
+for that.</p>
+
+<p>The regular expression's used are standard
+<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/RegExp">JavaScript</a>
+regexps; so no lookbehinds.</p>
+
+<h2 id="Match">Match</h2>
+
+<p>Match against a regular expression.</p>
+
+<pre><code>{ "token": "comment"
+, "match": "[#].*(?=\n)"
+}
+</code></pre>
+
+<h2 id="Begin/End">Begin/End</h2>
+
+<p>Match everything starting from <code>begin</code>, and finishing with <code>end</code> (inclusive).</p>
+
+<pre><code>{ "token": "comment"
+, "begin": "\n=begin"
+, "end":   "\n=end"
+}
+</code></pre>
+
+<h2 id="Begin/End/Include">Begin/End/Include</h2>
+
+<p>Rather than applying the top <code>token</code> to the entire contents of the
+<code>begin</code>/<code>end</code> block, only apply it to anything that is not matched
+by any of the rules within the <code>include</code> list.</p>
+
+<pre><code>{ "token":   "entity.tag"
+, "begin":   "[&lt;]/?\\w+"
+, "end":     "/?[&gt;]"
+, "include":
+  [ { "token": "entity.tag.attribute"
+    , "match": "[\\w-]+[=]"
+    }
+  , { "token": "string.literal"
+    , "match": "\"[^\"]*\""
+    }
+  , { "token": "string.literal"
+    , "match": "'[^']*'"
+    }
+  ]
+}
+</code></pre>
+
+<h2 id="Keywords">Keywords</h2>
+
+<p>Allows a pseudo-lookbehind to check for keywords. Equivalent to wrapping
+the contents in a lookbehind and lookahead for <code>\b</code>.</p>
+
+<pre><code>{ "token":    "constant.builtin"
+, "keywords": "true|false|nil"
+}
+</code></pre>
+
+<h2 id="Behind">Behind</h2>
+
+<p>A fake lookbehind. Maximum 1 character.</p>
+
+<pre><code>{ "token":  "entity.function"
+, "match":  "[^\\s\",'`()[]{}|;#]+"
+, "behind": "[(]"
+}
+</code></pre>
+
+<p>The example rule matches <code>(foo-bar</code> but not <code>!foo-bar</code>. The token
+<code>entity.function</code> is applied to only the <code>foo-bar</code> of <code>(foo-bar</code>.</p>
+
+<h2 id="Include+Language">Include Language</h2>
+
+<p>If your syntax is including a language, it <strong>must</strong> include that language
+in it's <code>require</code> list.</p>
+
+<p>For example,</p>
+
+<pre><code>{ "token":   "keyword.operator"
+, "begin":   "[&lt;]%"
+, "end":     "%[&gt;]"
+, "include": "@Ruby.Rails.View"
+}
+</code></pre>
+
+<p>would need the following declaration at the top of it's <code>syntax.json</code> file:</p>
+
+<pre><code>"require":   ["Ruby.Rails.View"]
+</code></pre>
+
+<h2 id="Include+Repo">Include Repo</h2>
+
+<p>Drop in rules.</p>
+
+<pre><code>, "syntax":
+  { "$":
+    [ ...
+
+    , { "token":   "string.literal"
+      , "begin":   "%[qQwrx]?[\\(]"
+      , "end":     "[\\)]"
+      , "include": [{"include": "#interpol"}]
+      }
+    , { "token":   "string.literal"
+      , "begin":   "`"
+      , "end":     "`"
+      , "include": [{"include": "#interpol"}]
+      }
+      ...
+    ]
+
+  , "#interpol":
+    { "token":   "string.interpol"
+    , "begin":   "#{"
+    , "end":     "}"
+    , "include": "$self"
+    }
+
+  }
+}
+</code></pre>
+
+<h2 id="$self">$self</h2>
+
+<p>Return to the <code>$</code> level.</p>
+
+<p>For example, a string interpolation could look like:</p>
+
+<pre><code>{ "token":   "string.interpol"
+, "begin":   "#{"
+, "end":     "}"
+, "include": "$self"
+}
+</code></pre>
+<nav class="table-of-contents">
+          
+ <ul>
+ <li><a href="#Existing+bundles">Existing bundles</a> </li>
+ <li><a href="#Installation">Installation</a> </li>
+ <li><a href="#CLI">CLI</a>
+  <ul>
+  <li><a href="#List+installed+bundles">List installed bundles</a>  </li>
+  <li><a href="#Install+a+bundle">Install a bundle</a>
+   <ul>
+   <li><a href="#..+or+from+a+URL">.. or from a URL</a>   </li>
+  </ul>
+  <li><a href="#Uninstall+a+bundle">Uninstall a bundle</a>  </li>
+  <li><a href="#Print+bundle+info">Print bundle info</a>  </li>
+  <li><a href="#Validate+a+bundle">Validate a bundle</a>  </li>
+ </ul>
+ <li><a href="#Writing+bundles">Writing bundles</a>
+  <ul>
+  <li><a href="#Naming+your+bundle">Naming your bundle</a>
+   <ul>
+   <li><a href="#Examples">Examples</a>   </li>
+  </ul>
+  <li><a href="#File+structure">File structure</a>  </li>
+  <li><a href="#syntax.json">syntax.json</a>  </li>
+  <li><a href="#icon.png">icon.png</a>  </li>
+  <li><a href="#completions.txt">completions.txt</a>  </li>
+ </ul>
+ <li><a href="#Highlighting+Rules">Highlighting Rules</a>
+  <ul>
+  <li><a href="#Match">Match</a>  </li>
+  <li><a href="#Begin/End">Begin/End</a>  </li>
+  <li><a href="#Begin/End/Include">Begin/End/Include</a>  </li>
+  <li><a href="#Keywords">Keywords</a>  </li>
+  <li><a href="#Behind">Behind</a>  </li>
+  <li><a href="#Include+Language">Include Language</a>  </li>
+  <li><a href="#Include+Repo">Include Repo</a>  </li>
+  <li><a href="#$self">$self</a>  </li>
+  </ul>
+ </li>
+ </ul>
+
+
+        </nav>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <hr/>
+        &copy; 2012
+        <a href="https://github.com/sentientwaffle">DJG</a>.
+        All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

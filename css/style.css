@@ -1,0 +1,239 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url("/fonts/Inconsolata.ttf") format('woff');
+}
+/* Layout
+-------------------------------------*/
+* {
+  margin: 0px;
+  padding: 0px;
+}
+html {
+  overflow: visible;
+}
+body {
+  background: #fff;
+  color: #222;
+  font-family: sans-serif;
+  overflow: auto;
+}
+body > header {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5e5e5), color-stop(1, #f2f2f2));
+  background: -webkit-linear-gradient(top, #e5e5e5 0%, #f2f2f2 100%);
+  background: -moz-linear-gradient(top, #e5e5e5 0%, #f2f2f2 100%);
+  background: linear-gradient(top, #e5e5e5 0%, #f2f2f2 100%);
+  -webkit-box-shadow: inset 0px -1px 5px rgba(0,0,0,0.09);
+  -moz-box-shadow: inset 0px -1px 5px rgba(0,0,0,0.09);
+  box-shadow: inset 0px -1px 5px rgba(0,0,0,0.09);
+  padding: 2px 0px;
+  text-shadow: 0px 1px 0px #fff;
+  width: 100%;
+}
+body > header h1 {
+  display: inline-block;
+  margin: 0px;
+  margin-right: 20px;
+  -webkit-user-select: none;
+}
+body > header h1 a {
+  color: #555;
+  font-family: 'Inconsolata', monospace;
+}
+body > header h1 a:hover {
+  color: #4183c4;
+  text-decoration: none;
+}
+body > header nav {
+  display: inline-block;
+  position: relative;
+  bottom: 5px;
+  ((null)): 0;
+}
+body > header nav > ul {
+  list-style: none;
+  margin: 0px;
+}
+body > header nav > ul > li {
+  display: inline-block;
+}
+body > header nav > ul a {
+  color: #666;
+  font-weight: bold;
+  padding: 11px 24px;
+}
+body > header nav > ul a:hover {
+  background: rgba(0,0,0,0.02);
+  color: #4183c4;
+  text-decoration: none;
+}
+body > footer {
+  color: #666;
+  font-size: 70%;
+  text-align: center;
+}
+body > footer .container {
+  padding: 16px;
+}
+.container {
+  clear: both;
+  margin: 0px auto;
+  width: 850px;
+}
+#soon {
+  background: #c00;
+  border: 1px solid #d33;
+  border-width: 0px 2px;
+  -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.40), inset 0px 1px 4px rgba(0,0,0,0.10);
+  -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.40), inset 0px 1px 4px rgba(0,0,0,0.10);
+  box-shadow: 0px 0px 2px rgba(0,0,0,0.40), inset 0px 1px 4px rgba(0,0,0,0.10);
+  color: #fff;
+  font-size: 100%;
+  font-variant: small-caps;
+  font-weight: bold;
+  margin: -7px 20px;
+  padding: 11px 24px;
+  text-shadow: 0px -1px 1px #800;
+  -webkit-user-select: none;
+}
+/* Markdown table of contents
+----------------------------------*/
+.table-of-contents {
+  background: rgba(0,0,0,0.05);
+  border: 1px solid #ddd;
+  bottom: 0px;
+  position: fixed;
+  top: 0px;
+  left: 20px;
+  font-size: 90%;
+  padding: 30px 10px;
+}
+.table-of-contents ul {
+  list-style: none;
+  margin: 0px;
+}
+.table-of-contents > ul > li {
+  margin: 10px 0px 6px;
+}
+.table-of-contents > ul > li > a {
+  font-weight: bold;
+}
+.table-of-contents > ul > li > ul > li > ul {
+  display: none;
+}
+/* Index: demo
+-----------------------------------*/
+.editor-demo {
+  background: #ccc;
+  -webkit-box-shadow: 3px 3px 20px rgba(0,0,0,0.50);
+  -moz-box-shadow: 3px 3px 20px rgba(0,0,0,0.50);
+  box-shadow: 3px 3px 20px rgba(0,0,0,0.50);
+  height: 600px;
+  margin-top: 20px;
+  width: 100%;
+}
+.features {
+  list-style: none;
+  margin: 10px 0px;
+}
+.features > li {
+  background: #ccc;
+  border: 1px solid #aaa;
+  display: inline-block;
+  float: left;
+  height: 166px;
+  margin: 1px;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: border-color 120ms linear;
+  -moz-transition: border-color 120ms linear;
+  width: 166px;
+}
+.features > li:hover {
+  border-color: #888;
+}
+.features > li > a {
+  display: block;
+  height: 100%;
+}
+.features > li > a:hover {
+  text-decoration: none;
+}
+.feature-description {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(0,0,0,0.60);
+  color: #fff;
+  padding: 6px 0px;
+  right: 0px;
+  text-align: center;
+}
+/* Base styles.
+--------------------------------------------*/
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+p {
+  line-height: 20px;
+  margin-top: 10px;
+}
+ul,
+ol {
+  margin: 20px 40px;
+}
+li > ul,
+li > ol {
+  margin: 5px 40px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000;
+  margin: 20px 0px 10px;
+}
+h1 {
+  margin-top: 40px;
+}
+h3,
+h4,
+h5,
+h6 {
+  color: #111;
+}
+::selection,
+::-moz-selection {
+  background: rgba(0,0,0,0.60);
+  color: #fff;
+}
+code {
+  background: #eee;
+  font-family: 'Inconsolata', monospace;
+}
+pre {
+  background: #eee;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.06);
+  -moz-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.06);
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.06);
+  margin: 6px;
+  padding: 4px;
+}
+hr {
+  background: #ccc;
+  border: none;
+  height: 2px;
+  margin: 10px 0px;
+}
+

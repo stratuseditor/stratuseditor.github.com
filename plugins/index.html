@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plugins | Stratus</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/fractus.css"/>
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28540494-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><a href="/">Stratus</a></h1>
+        <nav>
+          <ul>
+            <li><a href="/manual">Manual</a></li>
+            <li><a href="/bundles">Bundles</a></li>
+            <li><a href="/config">Config</a></li>
+            <li><a href="/plugins">Plugin API</a></li>
+            <li><a href="http://sentientwaffle.github.com/">Blog</a></li>
+            <li id="soon">Coming Soon</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <!--
+    <a href="http://github.com/stratuseditor/stratus"><img draggable="false" style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
+    -->
+    
+    <div class="container">
+      <h1 id="Overview">Overview</h1>
+
+<p>Your installed plugins are stored in a project named <code>.stratus</code>.</p>
+
+<h2 id="Libraries">Libraries</h2>
+
+<p>The following libraries are used by Stratus, and are therefore
+usable by plugins.</p>
+
+<ul>
+<li><a href="http://jquery.com/">jQuery</a></li>
+<li><a href="http://underscorejs.org/">Underscore</a></li>
+</ul>
+
+
+<p>The examples as well as the Stratus source code are written
+in <a href="http://coffeescript.org/">CoffeeScript</a>, but JavaScript
+will work just as well.</p>
+
+<h1 id="CLI">CLI</h1>
+
+<h2 id="Installation">Installation</h2>
+
+<p>To install a plugin:</p>
+
+<pre><code>$ stratus plugin:install &lt;your-username&gt; &lt;path/to/the/plugin.js&gt;
+</code></pre>
+
+<p>Plugins can be <a href="http://coffeescript.org/"><code>.coffee</code></a>, <code>.js</code>, <code>.css</code>, or
+<a href="http://learnboost.github.com/stylus"><code>.styl</code></a> files. Stylus files can
+import <a href="http://visionmedia.github.com/nib/">nib</a>.</p>
+
+<p>If a plugin is already installed with the same name, it will be overwritten
+without warning.</p>
+
+<h1 id="Config">Config</h1>
+
+<p>Configuration options from the <a href="/config"><code>config.json</code></a> and
+<a href="/config"><code>.stratus.json</code></a> files are placed in <code>window.data.config</code>.</p>
+
+<p>Here is what <code>window.data</code> looks like:</p>
+
+<pre><code># A List of all installed bundles.
+{ bundles: ["Bash", "C", "C.PlusPlus", "CSS", ...]
+
+# The user's configuration options, all merged &amp; ready to go.
+, config:
+  { "fractus.autocomplete":          "Escape"
+  , "fractus.font.monospace.family": "Inconsolata"
+  ...
+  }
+
+# Data related to the current project.
+, project:
+  # The top-level files, to load into the top of the file tree.
+  { files: [...]
+
+  # A list of all of the files in the project, for filtering by Snap Open.
+  , lsR:   [/* A list of all of the files in the project */]
+
+  # The project identifier.
+  , path:  "&lt;username&gt;/&lt;projectname&gt;"
+  }
+}
+</code></pre>
+
+<h1 id="Fractus">Fractus</h1>
+
+<h2 id="Editor">Editor</h2>
+
+<h3 id="Properties">Properties</h3>
+
+<ul>
+<li><code>buffer</code> - A <a href="#Buffer"><code>Buffer</code></a>.</li>
+<li><code>cursor</code> - A <a href="#Cursor"><code>Cursor</code></a>.</li>
+<li><code>layout</code> - A <code>Layout</code>.</li>
+<li><code>view</code>   - A <code>View</code>.</li>
+<li><code>path</code>   - (<code>String</code>) path to the file that the editor contains.</li>
+<li><code>syntax</code> - <code>Object</code> or <code>null</code>. If <code>Object</code>, it will have a
+<code>name</code> property.</li>
+</ul>
+
+
+<h3 id="Methods">Methods</h3>
+
+<h4 id="editor.text()+=>+String">editor.text() => String</h4>
+
+<p>Get the text content of the editor.</p>
+
+<h4 id="editor.save()">editor.save()</h4>
+
+<p>Save the contents of the editor.</p>
+
+<h2 id="Buffer">Buffer</h2>
+
+<h3 id="Example">Example</h3>
+
+<p>This is an example plugin that corrects your spelling of <code>teh</code> to <code>the</code>.</p>
+
+<pre><code>stratus = require 'stratus'
+stratus.on "line:change", (data) -&gt;
+  {editor, row, text} = data
+  if /teh/.test text
+    editor.buffer.setLine row, text.replace(/teh/g, "the")
+</code></pre>
+
+<p>To apply the example plugin to, say, <code>Text</code> files (where <code>Text</code> is the name
+of the bundle):</p>
+
+<pre><code>stratus.on "line:change", (data) -&gt;
+  return unless /^Text\b/.test editor.syntax?.name
+  # ...
+</code></pre>
+
+<h2 id="Keybindings">Keybindings</h2>
+
+<h3 id="Global">Global</h3>
+
+<p>These keybindings are only fired if they are not fired by Fractus (or
+another scope).</p>
+
+<pre><code>stratus.on "key.Alt-Control-s", -&gt;
+  console.log "You pressed 'Alt-Control-s'!"
+</code></pre>
+
+<h3 id="Fractus">Fractus</h3>
+
+<p>Key events bound here only apply within an editor.</p>
+
+<p>The callback function is passed an <code>Editor</code> object.</p>
+
+<pre><code>stratus.on "fractus.key.Control-\t", (editor) -&gt;
+  console.log "You pressed 'Control-Tab' within", editor
+</code></pre>
+
+<h2 id="Cursor">Cursor</h2>
+
+<h3 id="Properties">Properties</h3>
+
+<p>Either <code>point</code> or <code>region</code> is defined at a given time, depending on
+whether the user has a selection or just a carat.</p>
+
+<ul>
+<li><code>point</code>  - <a href="#Point">Point</a></li>
+<li><code>region</code> - <a href="#Region">Region</a></li>
+</ul>
+
+
+<h3 id="Methods">Methods</h3>
+
+<ul>
+<li><code>moveTo(row, col)</code></li>
+<li><code>moveToLineBegin()</code></li>
+<li><code>moveToLineEnd()</code></li>
+<li><code>moveToPrevWord()</code></li>
+<li><code>moveToNextWord()</code></li>
+<li><code>moveToDocBegin()</code></li>
+<li><code>moveToDocEnd()</code></li>
+<li><code>moveLeft()</code></li>
+<li><code>moveRight()</code></li>
+<li><code>moveUp()</code></li>
+<li><code>moveDown()</code></li>
+<li><code>select(region)</code></li>
+<li><code>selectTo(row, col)</code></li>
+<li><code>selectTo(row, col)</code></li>
+<li><code>selectToLineBegin()</code></li>
+<li><code>selectToLineEnd()</code></li>
+<li><code>selectToPrevWord()</code></li>
+<li><code>selectToNextWord()</code></li>
+<li><code>selectToDocBegin()</code></li>
+<li><code>selectToDocEnd()</code></li>
+<li><code>selectLeft()</code></li>
+<li><code>selectRight()</code></li>
+<li><code>selectUp()</code></li>
+<li><code>selectDown()</code></li>
+<li><code>moveVertical(amount)</code></li>
+<li><code>selectVertical(amount)</code></li>
+<li><code>selectAll()</code></li>
+<li><code>selectRow(row)</code></li>
+<li><code>selectRows(r1, r2)</code></li>
+<li><code>insert(text)</code></li>
+<li><code>overwrite(text)</code></li>
+<li><code>deleteBack()</code></li>
+<li><code>deleteForward()</code></li>
+<li><code>deleteWordBack()</code></li>
+<li><code>deleteWordForward()</code></li>
+<li><code>newLine()</code></li>
+<li><code>deleteSelection()</code></li>
+<li><code>deleteRows()</code></li>
+<li><code>text()</code></li>
+<li><code>indent(tab)</code></li>
+<li><code>outdent(tab)</code></li>
+<li><code>shiftLinesDown()</code></li>
+<li><code>shiftLinesUp()</code></li>
+</ul>
+
+
+<h2 id="Point">Point</h2>
+
+<h3 id="Properties">Properties</h3>
+
+<ul>
+<li><code>row</code> - Integer (0-based row index)</li>
+<li><code>col</code> - Integer (0-based column index)</li>
+</ul>
+
+
+<h2 id="Region">Region</h2>
+
+<h3 id="Properties">Properties</h3>
+
+<ul>
+<li><code>begin</code> - <a href="#Point">Point</a></li>
+<li><code>end</code>   - <a href="#Point">Point</a></li>
+</ul>
+
+
+<h1 id="Stratus">Stratus</h1>
+
+<h2 id="Events">Events</h2>
+
+<ul>
+<li><code>stratus.open</code>        - <code>(path)</code> - Called when a file is opened.</li>
+<li><code>stratus.save</code>        - <code>(editor)</code> - Called when a file is saved.</li>
+<li><code>stratus.key.*</code>       - Global keypress.</li>
+<li><code>fractus.key.*</code>       - <code>(editor)</code> - Keypress within an Editor.</li>
+<li><code>fractus.focus</code>       - <code>(editor)</code> - When an Editor gains focus.</li>
+<li><code>fractus.blur</code>        - <code>(editor)</code> - When an Editor loses focus.</li>
+<li><code>fractus.cursor.move</code> - <code>(editor)</code> - When the cursor moves
+within an editor.</li>
+</ul>
+
+
+<h2 id="Functions">Functions</h2>
+
+<h3 id="stratus.open(path)">stratus.open(path)</h3>
+
+<p>Open the given file in a new editor tab (If it is already open, the tab
+will be selected).</p>
+
+<h1 id="UI">UI</h1>
+
+<h2 id="Dialog">Dialog</h2>
+
+<pre><code>ui = require 'stratus-ui'
+ui.dialog "Title", $body
+</code></pre>
+
+<h3 id="Options">Options</h3>
+
+<ul>
+<li><code>draggable</code> - (default: <code>false</code>)</li>
+<li><code>closeable</code> - (default: <code>true</code>)</li>
+<li><code>modal</code>     - (default: <code>false</code>) whether or not to shade
+the page content behind the dialog.</li>
+</ul>
+
+
+<h3 id="Example">Example</h3>
+
+<pre><code>url = "https://gist.github.com/7aa9ae2819..."
+ui.dialog "Gist", """
+    &lt;div class="selection-to-gist"&gt;
+      &lt;input type="text" value="#{url}" readonly/&gt;
+      &lt;a class="symbol" href="#{url}" target="_blank" title="Open Gist in new tab"&gt;K&lt;/a&gt;
+    &lt;/div&gt;
+  """
+</code></pre>
+
+<p><img src="/images/manual/dialog.jpg" alt="dialog" /></p>
+
+<h2 id="Search">Search</h2>
+
+<p><code>term</code> - The <code>String</code> or <code>RegExp</code> to search for.</p>
+
+<h3 id="findOne">findOne</h3>
+
+<p>Highlight one match.</p>
+
+<p>Returns the number of results found (1 or 0).</p>
+
+<pre><code>stratus.ui.search.findOne editor, term
+</code></pre>
+
+<h3 id="findAll">findAll</h3>
+
+<p>Highlight all matches.</p>
+
+<p>Returns the number of results.</p>
+
+<pre><code>stratus.ui.search.findAll editor, term
+</code></pre>
+
+<h3 id="replaceOne">replaceOne</h3>
+
+<p>Returns the number of replacements (1 or 0).</p>
+
+<pre><code>stratus.ui.search.replaceOne editor, term
+</code></pre>
+
+<h3 id="replaceAll">replaceAll</h3>
+
+<p>Returns the number of replacements.</p>
+
+<pre><code>stratus.ui.search.replaceAll editor, term
+</code></pre>
+
+<h3 id="clear">clear</h3>
+
+<p>Un-highlight any search results within the editor.</p>
+
+<pre><code>stratus.ui.search.clear editor
+</code></pre>
+
+<h2 id="Toolbar">Toolbar</h2>
+
+<h3 id="Simple">Simple</h3>
+
+<pre><code>stratus = require 'stratus'
+stratus.ui.toolbar.Tools.append
+  text: "Trigger an annoying popup"
+  click: -&gt;
+    alert "IM AN ANNOYING POPUP!"
+</code></pre>
+
+<h3 id="Links">Links</h3>
+
+<p>When clicked, the url in <code>href</code> will be opened in a new tab.</p>
+
+<pre><code>stratus.ui.toolbar.Tools.append
+  text: "Open current project in GitHub"
+  href: "https://github.com/#{ window.data.project.name }"
+</code></pre>
+
+<h3 id="Nested">Nested</h3>
+
+<p><img src="/images/manual/toolbar-nested.jpg" alt="nested toolbar" /></p>
+
+<pre><code>stratus.ui.toolbar.Tools.append
+  text: "Gist"
+  actions: [
+    {text: "Private", click: -&gt; console.log("You clicked 'Gist &gt; Private'")}
+    {text: "Public",  click: -&gt; console.log("You clicked 'Gist &gt; Public'")}
+  ]
+</code></pre>
+
+<h3 id="Divider">Divider</h3>
+
+<p><img src="/images/manual/toolbar-divider.jpg" alt="nested toolbar" /></p>
+
+<pre><code>stratus.ui.toolbar.Tools.append {}
+</code></pre>
+<nav class="table-of-contents">
+          
+ <ul>
+ <li><a href="#Overview">Overview</a>
+  <ul>
+  <li><a href="#Libraries">Libraries</a>  </li>
+ </ul>
+ <li><a href="#CLI">CLI</a>
+  <ul>
+  <li><a href="#Installation">Installation</a>  </li>
+ </ul>
+ <li><a href="#Config">Config</a> </li>
+ <li><a href="#Fractus">Fractus</a>
+  <ul>
+  <li><a href="#Editor">Editor</a>
+   <ul>
+   <li><a href="#Properties">Properties</a>   </li>
+   <li><a href="#Methods">Methods</a>
+    <ul>
+    <li><a href="#editor.text()+=>+String">editor.text() => String</a>    </li>
+    <li><a href="#editor.save()">editor.save()</a>    </li>
+   </ul>
+   </li>
+  </ul>
+  <li><a href="#Buffer">Buffer</a>
+   <ul>
+   <li><a href="#Example">Example</a>   </li>
+  </ul>
+  <li><a href="#Keybindings">Keybindings</a>
+   <ul>
+   <li><a href="#Global">Global</a>   </li>
+   <li><a href="#Fractus">Fractus</a>   </li>
+  </ul>
+  <li><a href="#Cursor">Cursor</a>
+   <ul>
+   <li><a href="#Properties">Properties</a>   </li>
+   <li><a href="#Methods">Methods</a>   </li>
+  </ul>
+  <li><a href="#Point">Point</a>
+   <ul>
+   <li><a href="#Properties">Properties</a>   </li>
+  </ul>
+  <li><a href="#Region">Region</a>
+   <ul>
+   <li><a href="#Properties">Properties</a>   </li>
+  </ul>
+  </li>
+ </ul>
+ <li><a href="#Stratus">Stratus</a>
+  <ul>
+  <li><a href="#Events">Events</a>  </li>
+  <li><a href="#Functions">Functions</a>
+   <ul>
+   <li><a href="#stratus.open(path)">stratus.open(path)</a>   </li>
+  </ul>
+  </li>
+ </ul>
+ <li><a href="#UI">UI</a>
+  <ul>
+  <li><a href="#Dialog">Dialog</a>
+   <ul>
+   <li><a href="#Options">Options</a>   </li>
+   <li><a href="#Example">Example</a>   </li>
+  </ul>
+  <li><a href="#Search">Search</a>
+   <ul>
+   <li><a href="#findOne">findOne</a>   </li>
+   <li><a href="#findAll">findAll</a>   </li>
+   <li><a href="#replaceOne">replaceOne</a>   </li>
+   <li><a href="#replaceAll">replaceAll</a>   </li>
+   <li><a href="#clear">clear</a>   </li>
+  </ul>
+  <li><a href="#Toolbar">Toolbar</a>
+   <ul>
+   <li><a href="#Simple">Simple</a>   </li>
+   <li><a href="#Links">Links</a>   </li>
+   <li><a href="#Nested">Nested</a>   </li>
+   <li><a href="#Divider">Divider</a>   </li>
+   </ul>
+  </li>
+  </ul>
+ </li>
+ </ul>
+
+
+        </nav>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <hr/>
+        &copy; 2012
+        <a href="https://github.com/sentientwaffle">DJG</a>.
+        All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

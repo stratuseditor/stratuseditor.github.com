@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Manual | Stratus</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/fractus.css"/>
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28540494-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1><a href="/">Stratus</a></h1>
+        <nav>
+          <ul>
+            <li><a href="/manual">Manual</a></li>
+            <li><a href="/bundles">Bundles</a></li>
+            <li><a href="/config">Config</a></li>
+            <li><a href="/plugins">Plugin API</a></li>
+            <li><a href="http://sentientwaffle.github.com/">Blog</a></li>
+            <li id="soon">Coming Soon</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <!--
+    <a href="http://github.com/stratuseditor/stratus"><img draggable="false" style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub"></a>
+    -->
+    
+    <div class="container">
+      <h1 id="Overview">Overview</h1>
+
+<p>Stratus is a web based, programmer's editor. It's goal is to provide abundant
+configuration options and an open plugin API to make extensibility and
+customization a snap.</p>
+
+<p>Some features:</p>
+
+<ul>
+<li>Syntax highlighting (JSON grammars)</li>
+<li><a href="/bundles">Bundles</a></li>
+<li><a href="#Themes">Themeable</a> (JSON themes)</li>
+<li><a href="#File+Manager">Project file tree</a></li>
+<li><strong>Split screen</strong></li>
+<li><a href="#Search+++Replace">Search &amp; Replace</a> (text or regex)</li>
+<li><a href="#Snap+Open">Fuzzy-file opening</a></li>
+<li>Automation
+
+<ul>
+<li><a href="#Autocomplete">Autocomplete</a></li>
+<li>Indentation, outdentation</li>
+<li><a href="#Auto+Pairing">Paren, quote, bracket completion</a></li>
+</ul>
+</li>
+<li><a href="/plugins">Plugins</a> in JavaScript or CoffeeScript</li>
+<li>Configurable width tabs</li>
+<li>Variable-width font support</li>
+<li><strong>All in your web browser</strong></li>
+</ul>
+
+
+<h2 id="Browser+Support">Browser Support</h2>
+
+<p>Currently supported browsers:</p>
+
+<ul>
+<li>Google Chrome</li>
+<li>Chromium</li>
+</ul>
+
+
+<p>It probably will work in Safari also, but I have not tested it
+(let me know if you try it!).</p>
+
+<h2 id="Server+Installation">Server Installation</h2>
+
+<p>Regardless of Node.js' support for Windows, the Stratus server
+requires a Unix-like OS to run such as Linux or Mac OS.</p>
+
+<ol>
+<li><p><a href="https://github.com/joyent/node/wiki/Installation">Install Node.js and NPM</a></p></li>
+<li><p>Get the server</p>
+
+<pre><code># Get the bundle manager.
+$ npm install stratus-bundle -g
+
+# Install the default bundles.
+# (this might take a while)
+$ stratus-bundle setup
+...
+
+# Install the editor server.
+$ npm install stratus -g
+</code></pre></li>
+<li><p>Start the server</p>
+
+<pre><code>$ stratus start
+</code></pre>
+
+<p>Point your browser to the address it prints and start coding!</p></li>
+</ol>
+
+
+<h2 id="Server+Config">Server Config</h2>
+
+<ul>
+<li><code>--pass &lt;a password&gt;</code>: Require the user to input a password with
+HTTP basic authentication before they can use the editor.
+The username is <em>stratus</em>.</li>
+<li><code>--port &lt;port&gt;</code>: Set the port that Stratus is running on.</li>
+<li><code>--local</code>: Only allow access locally. This will null the password.</li>
+<li><code>--version</code>: Print the version.</li>
+<li><code>--help</code>: Print the options.</li>
+</ul>
+
+
+<h1 id="File+Manager">File Manager</h1>
+
+<p>Files can be opened either via the file manager by clicking on the file
+in the tree or the built-in <em>Snap Open</em> plugin.</p>
+
+<h2 id="Snap+Open">Snap Open</h2>
+
+<p>To activate <em>Snap Open</em>, press <code>Ctrl-o</code>. Files will be filtered
+using a fuzzy search. Use the up and down arrow keys to navigate the list</p>
+
+<p>To open a file, press enter to open the file or click the list item.
+Control-clicking a list item opens it without closing the dialog.</p>
+
+<p><img src="/images/manual/snap-open.jpg" alt="Snap open" /></p>
+
+<h2 id="Keyboard+navigation">Keyboard navigation</h2>
+
+<p>Click a file in the tree to enter the file tree scope.</p>
+
+<ul>
+<li><code>Up/Down</code>      - Navigate among visible leaves.</li>
+<li><code>Left</code>         - Collapse expandable leaf.</li>
+<li><code>Right</code>        - Expand expandable leaf.</li>
+<li><code>Home/end</code>     - Navigate to first or last visible leaf.</li>
+<li><code>Page up/down</code> - Navigate to the first or last sibling of the current leaf.</li>
+<li><code>Enter</code>        - Equivalent to clicking the leaf.</li>
+<li><code>Tab</code>          - Navigate to the next expandable leaf.</li>
+<li><code>Shift-Tab</code>    - Navigate to the previous expandable leaf.</li>
+</ul>
+
+
+<h1 id="Text+Navigation">Text Navigation</h1>
+
+<h2 id="Home-Home">Home-Home</h2>
+
+<p>Pressing <code>Home</code> when at the beginning of a line will place the cursor
+just before the first non-whitespace character in the line.</p>
+
+<h1 id="Text+Manipulation">Text Manipulation</h1>
+
+<h2 id="Line+Manipulation">Line Manipulation</h2>
+
+<h3 id="Indent+/+Outdent">Indent / Outdent</h3>
+
+<p>To indent several lines, select them and press <code>Tab</code>. To outdent
+one or more lines, select them and type <code>Shift-Tab</code>.</p>
+
+<h3 id="Moving+Lines">Moving Lines</h3>
+
+<p>Selected line(s) can be shifted up or down by selecting them and pressing
+<code>Alt-Up</code> or <code>Alt-Down</code>.</p>
+
+<h3 id="Deleting+Lines">Deleting Lines</h3>
+
+<p>To delete the selected lines, press <code>Ctrl-d</code>.</p>
+
+<h2 id="Auto+Pairing">Auto Pairing</h2>
+
+<p>When an open pair character is typed, the corresponding closing
+character will be automatically inserted into the text. The
+pairs for which this applies are (by default):</p>
+
+<pre><code>()  {}  []  ""  ''
+</code></pre>
+
+<p>In addition to automatic character insertion, selecting a body
+of text and then typing one of the open characters will
+wrap the selected text.</p>
+
+<p>The characters that are paired can be customized by bundle. For example,
+in HTML <code>&lt;&gt;</code> will also complete.</p>
+
+<h2 id="Autocomplete">Autocomplete</h2>
+
+<p>Autocomplete is activated with <code>Escape</code> by default. The words used to
+complete are drawn from the current bundle's <code>completions.txt</code> file,
+and also from words within the current file.</p>
+
+<h2 id="Search+++Replace">Search &amp; Replace</h2>
+
+<p>The search &amp; replace dialog (<code>Control-f</code> by default) behaves as you would
+expect.</p>
+
+<p><strong>RegExp captures</strong> - When the <em>Regular expression</em> check box is checked,
+the <em>Replace with</em> term has access to the captures of the <em>Search for</em>
+term using <code>$0</code>, <code>$1</code>, ...</p>
+
+<h1 id="Bundles">Bundles</h1>
+
+<p>See <a href="/bundles">Bundles</a>
+for information about bundles.</p>
+
+<h1 id="Themes">Themes</h1>
+
+<p>Editor themes are JSON files. See
+<a href="https://github.com/stratuseditor/stratus-color/blob/master/themes/Idlefingers.json">Idlefingers</a>
+for an example theme.</p>
+
+<p>Set the theme with the <a href="/config#fractus.theme">fractus.theme</a> configuration.</p>
+
+<p>Note that the <code>token</code>s used in <code>"syntax"</code> are not inclusive. Adding <code>foo</code>
+would do nothing, however, unless a syntax language is configured to
+highlight text using it.</p>
+
+<h2 id="Built-in+themes">Built-in themes</h2>
+
+<ul>
+<li><a href="http://idlefingers.co.uk/">Idlefingers</a> <em>(default)</em></li>
+<li><a href="https://github.com">GitHub</a></li>
+<li><a href="http://ethanschoonover.com/solarized">Solarized-Light</a></li>
+<li><a href="http://www.sublimetext.com/">Sublime</a></li>
+</ul>
+
+
+<h2 id="Installing+themes">Installing themes</h2>
+
+<p>Additional theme files can be placed in your <code>~/.stratus/themes</code> directory.</p>
+
+<h1 id="Project+Management">Project Management</h1>
+
+<p>Projects are stored in
+<code>$HOME/.stratus/development/projects/:username/:projectname</code>.</p>
+
+<h2 id="Link">Link</h2>
+
+<p>If you want to create a project that points to a different
+location on your file system than the default, create the project normally.
+Then,</p>
+
+<pre><code>$ stratus link username/projectname new/path/to/project/root
+</code></pre>
+
+<h2 id="Show">Show</h2>
+
+<p>Print the project's path.</p>
+
+<pre><code>$ stratus show username/projectname
+path/to/username/projectname
+</code></pre>
+<nav class="table-of-contents">
+          
+ <ul>
+ <li><a href="#Overview">Overview</a>
+  <ul>
+  <li><a href="#Browser+Support">Browser Support</a>  </li>
+  <li><a href="#Server+Installation">Server Installation</a>  </li>
+  <li><a href="#Server+Config">Server Config</a>  </li>
+ </ul>
+ <li><a href="#File+Manager">File Manager</a>
+  <ul>
+  <li><a href="#Snap+Open">Snap Open</a>  </li>
+  <li><a href="#Keyboard+navigation">Keyboard navigation</a>  </li>
+ </ul>
+ <li><a href="#Text+Navigation">Text Navigation</a>
+  <ul>
+  <li><a href="#Home-Home">Home-Home</a>  </li>
+ </ul>
+ <li><a href="#Text+Manipulation">Text Manipulation</a>
+  <ul>
+  <li><a href="#Line+Manipulation">Line Manipulation</a>
+   <ul>
+   <li><a href="#Indent+/+Outdent">Indent / Outdent</a>   </li>
+   <li><a href="#Moving+Lines">Moving Lines</a>   </li>
+   <li><a href="#Deleting+Lines">Deleting Lines</a>   </li>
+  </ul>
+  <li><a href="#Auto+Pairing">Auto Pairing</a>  </li>
+  <li><a href="#Autocomplete">Autocomplete</a>  </li>
+  <li><a href="#Search+++Replace">Search &amp; Replace</a>  </li>
+ </ul>
+ <li><a href="#Bundles">Bundles</a> </li>
+ <li><a href="#Themes">Themes</a>
+  <ul>
+  <li><a href="#Built-in+themes">Built-in themes</a>  </li>
+  <li><a href="#Installing+themes">Installing themes</a>  </li>
+ </ul>
+ <li><a href="#Project+Management">Project Management</a>
+  <ul>
+  <li><a href="#Link">Link</a>  </li>
+  <li><a href="#Show">Show</a>  </li>
+  </ul>
+ </li>
+ </ul>
+
+
+        </nav>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <hr/>
+        &copy; 2012
+        <a href="https://github.com/sentientwaffle">DJG</a>.
+        All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>
