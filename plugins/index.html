@@ -80,25 +80,25 @@ without warning.</p>
 
 <p>Here is what <code>window.data</code> looks like:</p>
 
-<pre><code># A List of all installed bundles.
+<pre><code>// A List of all installed bundles.
 { bundles: ["Bash", "C", "C.PlusPlus", "CSS", ...]
 
-# The user's configuration options, all merged &amp; ready to go.
+// The user's configuration options, all merged &amp; ready to go.
 , config:
   { "fractus.autocomplete":          "Escape"
   , "fractus.font.monospace.family": "Inconsolata"
   ...
   }
 
-# Data related to the current project.
+// Data related to the current project.
 , project:
-  # The top-level files, to load into the top of the file tree.
+  // The top-level files, to load into the top of the file tree.
   { files: [...]
 
-  # A list of all of the files in the project, for filtering by Snap Open.
-  , lsR:   [/* A list of all of the files in the project */]
+  // A list of all of the files in the project, for filtering by Snap Open.
+  , lsR:   [...]
 
-  # The project identifier.
+  // The project identifier.
   , path:  "&lt;username&gt;/&lt;projectname&gt;"
   }
 }
