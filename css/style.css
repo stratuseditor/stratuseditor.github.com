@@ -82,22 +82,6 @@ body > footer .container {
   margin: 0px auto;
   width: 850px;
 }
-#soon {
-  background: #c00;
-  border: 1px solid #d33;
-  border-width: 0px 2px;
-  -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.40), inset 0px 1px 4px rgba(0,0,0,0.10);
-  -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.40), inset 0px 1px 4px rgba(0,0,0,0.10);
-  box-shadow: 0px 0px 2px rgba(0,0,0,0.40), inset 0px 1px 4px rgba(0,0,0,0.10);
-  color: #fff;
-  font-size: 15px;
-  font-variant: small-caps;
-  font-weight: bold;
-  margin: -7px 20px;
-  padding: 11px 17px;
-  text-shadow: 0px -1px 1px #800;
-  -webkit-user-select: none;
-}
 /* Markdown table of contents
 ----------------------------------*/
 .table-of-contents {
